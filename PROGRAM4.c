@@ -1,11 +1,12 @@
-// Online C compiler to run C program online
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
+
 struct node
 {
     int info;
     struct node *ptr;
-} *front,*rear,*temp,*front1;
+}*front,*rear,*temp,*front1;
+
 int frontelement();
 void enq(int data);
 void deq();
@@ -13,101 +14,113 @@ void empty();
 void display();
 void create();
 void queuesize();
+
 int count=0;
 void main()
 {
-    int no,ch,e;
-    printf("\n1-Enque");
-    printf("\n2-Deque");
-    printf("\n3-Front element");
-    printf("\n4-Empty");
-    printf("\n5-Exit");
-    printf("\n6-Dislay");
-    printf("\n7-Queue size");
+    int no, ch, e;
+    printf("\n 1 - enque");
+    printf("\n 2 - deque");
+    printf("\n 3 - Front Element");
+    printf("\n 4 - Empty");
+    printf("\n 5 - Exit");
+    printf("\n 6 - Display");
+    printf("\n 7 - Queue Size");
+
     create();
-    while(1)
-    {
-        printf("\n Enter choice:");
+    while(1){
+        printf("\nEnter Your Choice : ");
         scanf("%d",&ch);
-        switch(ch)
-        {
+        switch(ch){
             case 1:
-            printf("Enter data:");
-            scanf("%d",&ch);
-            enq(no);
-            break;
+                printf("Enter Data : ");
+                scanf("%d",&no);
+                enq(no);
+                break;
+            
             case 2:
-            deq();
-            break;
+                deq();
+                break;
             case 3:
-            e=frontelement();
-            if(e!=0)
-            printf("Front element:%d",e);
-            else
-            printf("\n No front element n Queue as queue is empyt");
-            break;
+                e=frontelement();
+                if(e!=0)
+                    printf("Front Element : %d",e);
+                else
+                    printf("\nNo front element, queue is empty");
+                break;
             case 4:
-            empty();
-            break;
+                empty();
+                break;
             case 5:
-            exit(0);
+                exit(0);
             case 6:
-            display();
-            break;
+                display();
+                break;
             case 7:
-            queuesize();
-            break;
+                queuesize();
+                break;
             default:
-            printf("Wrong choice,Please enter correct choice");
-            break;
+                printf("Wrong choice, Please enter a correct choice");
+                break;
         }
     }
 }
-void create()
-{
+
+void create() {
     front=rear=NULL;
 }
-void queuesize()
-{
-    printf("\n Queuesize:%d",count);
+
+void queuesize() {
+    printf("\nQueue Size : %d",count);
 }
-void enq(int data)
-{
-    if(rear==NULL)
-    {
-        rear=(struct node*)malloc(1*sizeof(struct node));
+
+void enq(int data) {
+    if(rear==NULL) {
+        rear = (struct node *)malloc(1*sizeof(struct node));
+        rear->ptr=NULL;
+        rear->info=data;
+        front=rear;
+    }
+    else {
+        temp=(struct node *)malloc(1*sizeof(struct node));
         rear->ptr=temp;
         temp->info=data;
         temp->ptr=NULL;
-        rear=temp;
+        rear = temp;
     }
     count++;
 }
-void display()
-{
+
+
+void display() {
     front1=front;
-    if((front==NULL) && (rear==NULL))
-    {
-        printf("Queue is empty");
+    if((front1==NULL)&&(rear==NULL)) {
+        printf("Queue is Empty");
         return;
     }
-    while(front1!=rear){
-        printf("%d",front1->info);
+
+    while(front1 != rear) {
+        printf("%d | ",front1->info);
         front1=front1->ptr;
     }
-    if(front1==rear){
+
+    if(front1==rear) {
         printf("%d",front1->info);
     }
 }
-void deq(){
+
+void deq() {
     front1=front;
-    if(front1==NULL){
+    
+    if(front1==NULL) {
         printf("\nError: Trying to display elements from empty queue");
         return;
-    } else {
-        if(front1->ptr!=NULL){
+    } 
+    else 
+    // {
+        if(front1->ptr!=NULL) {
             front1=front1->ptr;
-            printf("\nDequed Value : %d",front->info);
+            printf("\nDequed Value: %d",front->info);
             free(front);
             front=front1;
         } else {
@@ -117,22 +130,19 @@ void deq(){
             rear=NULL;
         }
         count--;
-    }
+    // } 
 }
-    int frontelement()
-    {
-        if((front!=NULL) && (rear!=NULL))
-            return(front->info);
-        else
-            return 0;
-    }
-void empty(){
+
+int frontelement() {
+    if((front!=NULL)&&(rear!=NULL))
+        return(front->info);
+    else
+        return 0;
+}
+
+void empty() {
     if((front==NULL)&&(rear==NULL))
         printf("\nQueue Empty");
     else
-        printf("Queue is not Empty");
+        printf("Queue Not Empty");
 }
-
-
-
-    
